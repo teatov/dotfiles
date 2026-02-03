@@ -58,14 +58,31 @@ PROMPT="%F{blue}%2~%f %F{8}${vcs_info_msg_0_}%f$ "
 # Tooling
 export GOPATH="$HOME/go"
 
-. "$HOME/.cargo/env"
+[[ -f "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
 
 export NVM_DIR="$HOME/.nvm"
-. "$NVM_DIR/nvm.sh"
-. "$NVM_DIR/bash_completion"
+[[ -f "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh"
+[[ -f "$NVM_DIR/bash_completion" ]] && source "$NVM_DIR/bash_completion"
 
 # Path
 typeset -TUx PATH path
 
 path+="$HOME/.local/bin"
 path+="$HOME/bin"
+
+if [ $(uname | sed -n 's/.*\( *MINGW *\).*/\1/ip') ]; then
+	path+="$HOME/AppData/Local/Programs/Python/Python313/Scripts"
+	path+="$HOME/AppData/Local/Programs/Python/Python313"
+	path+="$HOME/AppData/Local/Programs/Python/Launcher"
+	path+="$HOME/AppData/Local/Microsoft/WindowsApps"
+	path+="$HOME/AppData/Roaming/Composer/vendor/bin"
+	path+="$HOME/AppData/Local/Programs/Zed/bin"
+	path+="$HOME/AppData/Roaming/npm"
+
+	path+="/c/ProgramData/chocolatey/bin"
+	path+="/c/Program Files/Docker/Docker/resources/bin"
+	path+="/c/tools/php85"
+	path+="/c/ProgramData/ComposerSetup/bin"
+	path+="/c/Program Files/nodejs"
+	path+="/c/Program Files/GitHub CLI/"
+fi

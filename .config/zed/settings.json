@@ -261,6 +261,23 @@
         },
       },
     },
+    "terminal": {
+      "shell": {
+        "with_arguments": {
+          "program": "cmd.exe",
+          "args": [
+            "/c",
+            "C:\\msys64\\msys2_shell.cmd",
+            "-defterm",
+            "-here",
+            "-no-start",
+            "-ucrt64",
+            "-shell",
+            "zsh",
+          ],
+        },
+      },
+    },
   },
   "wrap_guides": [80],
 }
