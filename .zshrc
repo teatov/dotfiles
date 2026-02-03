@@ -60,22 +60,13 @@ PROMPT+='%F{6}%2~%f '
 PROMPT+='%F{8}${vcs_info_msg_0_}%f'
 PROMPT+='%(?.$.%F{9}$%f) '
 
-# Tooling
-export GOPATH="$HOME/go"
-
-[[ -f "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
-
-export NVM_DIR="$HOME/.nvm"
-[[ -f "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh"
-[[ -f "$NVM_DIR/bash_completion" ]] && source "$NVM_DIR/bash_completion"
-
-# Path
+# Environment
 typeset -TUx PATH path
 
 path+="$HOME/.local/bin"
 path+="$HOME/bin"
 
-if [ IS_MINGW ]; then
+if [ $IS_MINGW ]; then
 	path+="$HOME/AppData/Local/Programs/Python/Python313/Scripts"
 	path+="$HOME/AppData/Local/Programs/Python/Python313"
 	path+="$HOME/AppData/Local/Programs/Python/Launcher"
@@ -92,3 +83,11 @@ if [ IS_MINGW ]; then
 	path+="/c/Program Files/GitHub CLI/"
 	path+="/c/Program Files/Git/cmd"
 fi
+
+[[ -f "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
+
+export NVM_DIR="$HOME/.nvm"
+[[ -f "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh"
+[[ -f "$NVM_DIR/bash_completion" ]] && source "$NVM_DIR/bash_completion"
+
+export GOPATH="$HOME/go"
