@@ -90,4 +90,5 @@ if [ IS_MINGW ]; then
 	path+="/c/ProgramData/ComposerSetup/bin"
 	path+="/c/Program Files/nodejs"
 	path+="/c/Program Files/GitHub CLI/"
+	path+="/c/Program Files/Git/cmd"
 fi
