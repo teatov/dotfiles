@@ -128,7 +128,6 @@
     "current_line_highlight": "line",
     "display_in": "all_editors",
     "max_width_columns": 40,
-    "show": "auto",
     "thumb": "always",
   },
   "notification_panel": {
