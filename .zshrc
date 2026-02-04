@@ -21,9 +21,9 @@ printexec() {
 	"$@"
 }
 
+ZED_SETTINGS="~/.config/zed/settings.json"
 alias dotfiles='git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME"'
 alias sa="printexec source ~/.zshrc"
-ZED_SETTINGS="~/.config/zed/settings.json"
 alias zed-settings-sort="jsonlint -Sf $ZED_SETTINGS |
 jq --sort-keys '.' |
 prettier --stdin-filepath .jsonc |

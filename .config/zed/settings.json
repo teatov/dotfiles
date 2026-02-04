@@ -175,7 +175,9 @@
     "metrics": false,
   },
   "terminal": {
-    "shell": "system",
+    "shell": {
+      "program": "zsh",
+    },
   },
   "theme": "Vesper",
   "theme_overrides": {
@@ -260,19 +262,13 @@
   },
   "ui_font_family": ".ZedSans",
   "vertical_scroll_margin": 8,
+  "wrap_guides": [80],
   "windows": {
-    "lsp": {
-      "clangd": {
-        "binary": {
-          "arguments": ["--query-driver=gcc"],
-        },
-      },
-    },
     "terminal": {
       "shell": {
         "with_arguments": {
           "args": [
-            "/c",
+            "-Command",
             "C:\\msys64\\msys2_shell.cmd",
             "-defterm",
             "-here",
@@ -281,10 +277,9 @@
             "-shell",
             "zsh",
           ],
-          "program": "cmd.exe",
+          "program": "pwsh",
         },
       },
     },
   },
-  "wrap_guides": [80],
 }
