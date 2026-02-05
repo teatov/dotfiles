@@ -1,17 +1,5 @@
-Chocolatey
 bruno
-chocolatey
-chocolatey-compatibility.extension
-chocolatey-core.extension
-chocolatey-windowsupdate.extension
 composer
 gh
 go-task
-KB2919355
-KB2919442
-KB2999226
-KB3033929
-KB3035131
 php
-vcredist140
-vcredist2015

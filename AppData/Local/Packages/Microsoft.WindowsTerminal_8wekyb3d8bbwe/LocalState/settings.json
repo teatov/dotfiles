@@ -43,7 +43,7 @@
                 "size": 16
             },
             "opacity": 100,
-            "rightClickContextMenu": true,
+            "rightClickContextMenu": false,
             "useAcrylic": false
         },
         "list": 

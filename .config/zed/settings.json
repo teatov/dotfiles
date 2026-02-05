@@ -262,7 +262,6 @@
   },
   "ui_font_family": ".ZedSans",
   "vertical_scroll_margin": 8,
-  "wrap_guides": [80],
   "windows": {
     "terminal": {
       "shell": {
@@ -282,4 +281,5 @@
       },
     },
   },
+  "wrap_guides": [80],
 }

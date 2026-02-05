@@ -1,6 +1,4 @@
-# Plugins
-source $HOME/.zsh/async.zsh
-async_init
+source "$HOME/.pkgsync/pkgsync.zsh"
 
 # General
 setopt autocd
@@ -22,24 +20,6 @@ else
 	COOKIEPATH="$HOME/.waterfox"
 fi
 alias yt-dlp="yt-dlp --cookies-from-browser "firefox:$COOKIEPATH""
-
-PKGSYNCDIR="$HOME/.pkgsync"
-
-pkgsave() {
-	pipx list --short | cut -d ' ' -f 1 >"$PKGSYNCDIR/pipx.txt"
-
-	npm list -g --depth 0 | sed '1d' | cut -d ' ' -f 2 |
-		cut -d '@' -f 1 >"$PKGSYNCDIR/npm.txt"
-
-	if [[ $IS_MINGW ]]; then
-		pacman -Qe | cut -d ' ' -f 1 >"$PKGSYNCDIR/pacman.txt"
-
-		choco list | sed '$d' | cut -d ' ' -f 1 >"$PKGSYNCDIR/choco.txt"
-	else
-		dnf repoquery --userinstalled --leaves |
-			awk -F "-[0-9]+:" '{print $1}' >"$PKGSYNCDIR/dnf.txt"
-	fi
-}
 
 zedconfsort() {
 	ZED_SETTINGS="$HOME/.config/zed/settings.json"
@@ -71,6 +51,9 @@ bindkey "^[[A" up-line-or-beginning-search
 bindkey "^[[B" down-line-or-beginning-search
 
 # Prompt
+source $HOME/.zsh/async.zsh
+async_init
+
 setopt prompt_subst
 autoload -Uz vcs_info
 
@@ -136,3 +119,4 @@ if [[ -s "$NVM_DIR/nvm.sh" ]]; then
 		eval "${cmd}(){ unset -f ${NODE_GLOBALS}; load_nvm; ${cmd} \$@ }"
 	done
 fi
+[[ -s "$NVM_DIR/bash_completion" ]] && source "$NVM_DIR/bash_completion"
