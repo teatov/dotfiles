@@ -14,4 +14,5 @@ TrimTrailingSpacesInSelectedText=true
 
 [Scrolling]
 HighlightScrolledLines=false
+HistorySize=10000
 ScrollBarPosition=1
