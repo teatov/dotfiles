@@ -13,21 +13,44 @@ bindkey "^[[1;3D" backward-word
 IS_MINGW=$(uname | sed -n "s/.*\( *MINGW *\).*/\1/ip")
 
 # Utilities
-printexec() {
-	{
-		printf "%q " "$@"
-		echo
-	} >&2
-	"$@"
+alias sa="source $HOME/.zshrc"
+alias dotfiles="git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME""
+
+if [[ $IS_MINGW ]]; then
+	COOKIEPATH="%APPDATA%/Waterfox/Profiles"
+else
+	COOKIEPATH="$HOME/.waterfox"
+fi
+alias yt-dlp="yt-dlp --cookies-from-browser "firefox:$COOKIEPATH""
+
+PKGSYNCDIR="$HOME/.pkgsync"
+
+pkgsave() {
+	set -x
+
+	pipx list --short | cut -d ' ' -f 1 >"$PKGSYNCDIR/pipx.txt"
+
+	pip list --user --format freeze |
+		awk -F "==" "{print $1}" >"$PKGSYNCDIR/pip.txt"
+
+	npm list -g --depth 0 | sed '1d' | cut -d ' ' -f 2 |
+		cut -d '@' -f 1 >"$PKGSYNCDIR/npm.txt"
+
+	if [[ $IS_MINGW ]]; then
+		pacman -Qe | cut -d ' ' -f 1 >"$PKGSYNCDIR/pacman.txt"
+
+		choco list | sed '$d' | cut -d ' ' -f 1 >"$PKGSYNCDIR/choco.txt"
+	else
+		dnf list --userinstalled >"$PKGSYNCDIR/dnf.txt"
+	fi
 }
 
-ZED_SETTINGS="~/.config/zed/settings.json"
-alias dotfiles='git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME"'
-alias sa="printexec source ~/.zshrc"
-alias zed-settings-sort="jsonlint -Sf $ZED_SETTINGS |
-jq --sort-keys '.' |
-prettier --stdin-filepath .jsonc |
-sponge $ZED_SETTINGS"
+zedconfsort() {
+	set -x
+	ZED_SETTINGS="$HOME/.config/zed/settings.json"
+	jsonlint -Sf $ZED_SETTINGS | jq --sort-keys "." |
+		prettier --stdin-filepath .jsonc | sponge $ZED_SETTINGS
+}
 
 # Completion
 autoload -Uz compinit
@@ -37,7 +60,7 @@ zstyle ":completion:*" matcher-list "m:{[:lower:]}={[:upper:]}"
 zstyle ":compinstall" filename "$HOME/.zshrc"
 
 # History
-HISTFILE=~/.histfile
+HISTFILE=$HOME/.histfile
 HISTSIZE=100000
 SAVEHIST=100000
 
@@ -88,20 +111,15 @@ typeset -TUx PATH path
 path+="$HOME/.local/bin"
 path+="$HOME/bin"
 
-if [ $IS_MINGW ]; then
-	path+="$HOME/AppData/Local/Programs/Python/Python313/Scripts"
-	path+="$HOME/AppData/Local/Programs/Python/Python313"
-	path+="$HOME/AppData/Local/Programs/Python/Launcher"
+if [[ $IS_MINGW ]]; then
 	path+="$HOME/AppData/Local/Microsoft/WindowsApps"
 	path+="$HOME/AppData/Roaming/Composer/vendor/bin"
 	path+="$HOME/AppData/Local/Programs/Zed/bin"
-	path+="$HOME/AppData/Roaming/npm"
 
 	path+="/c/ProgramData/chocolatey/bin"
 	path+="/c/Program Files/Docker/Docker/resources/bin"
 	path+="/c/tools/php85"
 	path+="/c/ProgramData/ComposerSetup/bin"
-	path+="/c/Program Files/nodejs"
 	path+="/c/Program Files/GitHub CLI/"
 	path+="/c/Program Files/Git/cmd"
 fi
