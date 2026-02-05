@@ -26,12 +26,7 @@ alias yt-dlp="yt-dlp --cookies-from-browser "firefox:$COOKIEPATH""
 PKGSYNCDIR="$HOME/.pkgsync"
 
 pkgsave() {
-	set -x
-
 	pipx list --short | cut -d ' ' -f 1 >"$PKGSYNCDIR/pipx.txt"
-
-	pip list --user --format freeze |
-		awk -F "==" "{print $1}" >"$PKGSYNCDIR/pip.txt"
 
 	npm list -g --depth 0 | sed '1d' | cut -d ' ' -f 2 |
 		cut -d '@' -f 1 >"$PKGSYNCDIR/npm.txt"
@@ -41,12 +36,12 @@ pkgsave() {
 
 		choco list | sed '$d' | cut -d ' ' -f 1 >"$PKGSYNCDIR/choco.txt"
 	else
-		dnf list --userinstalled >"$PKGSYNCDIR/dnf.txt"
+		dnf repoquery --userinstalled --leaves |
+			awk -F "-[0-9]+:" '{print $1}' >"$PKGSYNCDIR/dnf.txt"
 	fi
 }
 
 zedconfsort() {
-	set -x
 	ZED_SETTINGS="$HOME/.config/zed/settings.json"
 	jsonlint -Sf $ZED_SETTINGS | jq --sort-keys "." |
 		prettier --stdin-filepath .jsonc | sponge $ZED_SETTINGS
