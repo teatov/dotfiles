@@ -18,7 +18,7 @@
     "pest": true,
     "php": true,
     "svelte": true,
-    "toml": true,
+    "tombi": true,
     "vesper": true,
     "xml": true,
     "zig": true,

@@ -1,0 +1,15 @@
+# --config-file "C:/Users/user/.alacritty.toml" --working-directory "C:/Users/user" --command "C:/msys64/msys2_shell.cmd -defterm -here -no-start -ucrt64 -shell zsh"
+[window]
+dimensions = { columns = 110, lines = 30 }
+dynamic_title = false
+
+[font]
+normal = { family = "Maple Mono", style = "Regular" }
+size = 16.0
+
+[mouse]
+hide_when_typing = true
+# bindings = [
+#   { mouse = "WheelUp", mods = "Control", action = "IncreaseFontSize" },
+#   { mouse = "WheelDown", mods = "Control", action = "DecreaseFontSize" },
+# ]
