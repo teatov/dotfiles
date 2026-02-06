@@ -1,4 +1,4 @@
-# --config-file "C:/Users/user/.alacritty.toml" --working-directory "C:/Users/user" --command "C:/msys64/msys2_shell.cmd -defterm -here -no-start -ucrt64 -shell zsh"
+# --working-directory "C:/Users/user" --config-file "C:/Users/user/.alacritty.toml" --command "C:/msys64/msys2_shell.cmd -defterm -here -no-start -ucrt64 -shell zsh"
 [window]
 dimensions = { columns = 110, lines = 30 }
 
