@@ -1,5 +1,3 @@
-source "$HOME/.pkgsync/pkgsync.zsh"
-
 # General
 setopt autocd
 
@@ -26,6 +24,8 @@ zedconfsort() {
 	jsonlint -Sf $ZED_SETTINGS | jq --sort-keys "." |
 		prettier --stdin-filepath .jsonc | sponge $ZED_SETTINGS
 }
+
+source "$HOME/.pkgsync/pkgsync.zsh"
 
 # Completion
 autoload -Uz compinit
