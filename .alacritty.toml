@@ -13,3 +13,8 @@ hide_when_typing = true
 #   { mouse = "WheelUp", mods = "Control", action = "IncreaseFontSize" },
 #   { mouse = "WheelDown", mods = "Control", action = "DecreaseFontSize" },
 # ]
+
+[keyboard]
+bindings = [
+  { key = "N", mods = "Control|Shift", action = "CreateNewWindow" },
+]
