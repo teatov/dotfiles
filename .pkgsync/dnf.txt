@@ -9,6 +9,7 @@ abrt-cli
 abrt-desktop
 akmod-nvidia
 akregator
+alacritty
 alsa-lib-devel
 alsa-sof-firmware
 alsa-utils
